@@ -1,6 +1,14 @@
 package web.model;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "users")
@@ -9,8 +17,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
+    @Pattern(regexp = "[a-zA-Z]+", message = "Name should contain only characters")
     private String name;
     @Column(name = "age")
+    @PositiveOrZero(message = "Age should be greater than 0")
     private int age;
 
     public User() {
